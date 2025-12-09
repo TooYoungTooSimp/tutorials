@@ -1,6 +1,6 @@
 # AIGC Experiments
 
-## [语音转换 (Voice Conversion, VC)](/TooYoungTooSimp/vc_playground)
+## [语音转换 (Voice Conversion, VC)](https://github.com/TooYoungTooSimp/vc_playground)
 
 - **目标**: 一个轻量的语音转换(Voice Conversion, VC)实验流程。以内容特征(Content)与基频(F0)为条件，结合说话人向量进行声学建模，预测对齐的对数 Mel 频谱，再用声码器合成音频。
 - **阶段**: 

@@ -1,7 +1,6 @@
 import cutlass
 import cutlass.cute as cute
 from cutlass.cute.runtime import from_dlpack
-
 import numpy as np
 
 
@@ -9,15 +8,14 @@ import numpy as np
 def load_and_store(res: cute.Tensor, a: cute.Tensor, b: cute.Tensor):
     """
     Load data from memory and store the result to memory.
-
     :param res: The destination tensor to store the result.
     :param a: The source tensor to be loaded.
     :param b: The source tensor to be loaded.
     """
     a_vec = a.load()
-    print(f"a_vec: {a_vec}")  # prints `a_vec: vector<12xf32> o (3, 4)`
+    print(f"a_vec: {a_vec}")
     b_vec = b.load()
-    print(f"b_vec: {b_vec}")  # prints `b_vec: vector<12xf32> o (3, 4)`
+    print(f"b_vec: {b_vec}")
     res.store(a_vec + b_vec)
     cute.print_tensor(res)
 

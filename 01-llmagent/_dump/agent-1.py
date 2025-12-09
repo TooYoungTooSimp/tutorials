@@ -119,7 +119,7 @@ def get_keywords() -> str:
     """
     return the keywords for RAG search
     """
-    return keywords.split()
+    return " ".join(keywords.split())
 
 
 @tool

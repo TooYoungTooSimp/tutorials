@@ -1,13 +1,16 @@
 from dotenv import load_dotenv
-from mcp.server.fastmcp import FastMCP
-from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
+from mcp.server.fastmcp import FastMCP
+from os import environ
 
 load_dotenv()
+EMB_MODEL_NAME = environ.get("EMB_MODEL_NAME", "text-embedding-3")
+
 mcp = FastMCP()
 db = FAISS.load_local(
     "faiss_db",
-    OpenAIEmbeddings(),
+    OpenAIEmbeddings(model=EMB_MODEL_NAME),
     allow_dangerous_deserialization=True,
 )
 

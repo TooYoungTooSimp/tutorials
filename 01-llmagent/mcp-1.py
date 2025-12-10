@@ -1,8 +1,9 @@
-from gpt_common import *
+from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
+load_dotenv()
 mcp = FastMCP()
 db = FAISS.load_local(
     "faiss_db",
@@ -12,30 +13,20 @@ db = FAISS.load_local(
 
 
 @mcp.tool()
-def get_keywords() -> str:
+def query_paperdb(kw: str) -> str:
     """
-    return the keywords for RAG search
-    """
-    import json
-
-    with open("keywords.txt", "r", encoding="utf-8") as f:
-        return json.dumps(f.read().strip().split(), ensure_ascii=False)
-
-
-@mcp.tool()
-def query_db(kw: str) -> str:
-    """
-    accept keyword and return related information
+    Accept keywords and return related paper titles, multiple keywords should be separated by '|'.
+    This tool should be called before output any realworld-related information.
 
     Args:
         kw (str): The keyword to query the database
     """
     docs = []
-    for skw in kw.split():
+    for skw in kw.split("|"):
         if not (skw := skw.strip()):
             continue
         print(f"Searching for keyword: {skw}")
-        docs.extend(db.similarity_search(skw, k=3))
+        docs.extend(db.similarity_search(skw, k=10))
     rag_result = "\n".join([doc.page_content for doc in docs])
     return rag_result
 

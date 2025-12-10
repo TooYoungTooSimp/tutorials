@@ -266,12 +266,12 @@ class GradioUI:
             file_uploads_log = gr.State([])
             chatbot = gr.Chatbot(
                 label="Agent",
-                type="messages",
+                # type="messages",
                 avatar_images=(
                     None,
                     "https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/communication/Alfred.png",
                 ),
-                resizeable=True,
+                resizable=True,
                 scale=1,
             )
             # If an upload folder is provided, enable the upload feature
@@ -290,7 +290,7 @@ class GradioUI:
                 [stored_messages, text_input],
             ).then(self.interact_with_agent, [stored_messages, chatbot], [chatbot])
 
-        demo.launch(debug=True, share=True, **kwargs)
+        demo.launch(debug=True, share=False, **kwargs)
 
 
 __all__ = ["stream_to_gradio", "GradioUI"]

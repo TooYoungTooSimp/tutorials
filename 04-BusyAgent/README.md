@@ -1,4 +1,4 @@
-# 我们无比骄傲地向您推出：BusyAgent / We proudly present to you, BusyAgent
+# We proudly present to you, BusyAgent
 
 **大道至简。一个有且仅有一个 Tool 的 Agent。**
 
